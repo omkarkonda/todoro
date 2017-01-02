@@ -1,0 +1,172 @@
+/* app css stylesheet */
+/*
+Medium sea green #33B07C
+Russian green #529769
+Cadmum Orange #E3872D
+Dark pink #E3597E
+Vermilion #E34239
+*/
+
+/*
+
+font-family: 'Oswald', sans-serif;
+font-family: 'Pacifico', cursive;
+*/
+
+body{
+  background-color:#f1f1f1;
+}
+/*
+  Header
+*/
+.header{
+  display:flex;
+  justify-content: flex-start;
+  align-items:center;
+  height: 50px;
+  background-color: #33B07C;
+}
+
+.header > .flex-item{
+  flex: 1 0 auto;
+  align-self: auto;
+}
+
+.header .links{
+  display: flex;
+  justify-content: flex-end;
+}
+
+/*
+  ####################  Timer  #################
+*/
+
+.timerWrapper{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  background-color: #ffffff;
+  flex-wrap: wrap;
+  min-height: 150px;
+  flex-direction: column;
+}
+
+.timerWrapper .timer{
+  flex:1 0 auto;
+  text-align: center;
+}
+
+.timer h1{
+  font-family: 'Oswald', sans-serif;
+  font-size: 100px;
+  margin:20px;
+}
+
+h1.tdTime{
+  color:#E3872D;
+
+}
+h1.brTime{
+  color:#E3597E;
+}
+.timerWrapper .currenttask{
+  position: relative;
+  flex:1 0 auto;
+  text-align: center;
+}
+.currenttask .line{
+  position: absolute;
+  left:-2px;
+  top:0;
+  height: 100%;
+  width:2px;
+  background-color: #529769;
+
+  transition: all 60s linear;
+}
+
+.currenttask:hover .line{
+  transform: scaleX(500);
+
+}
+
+.currenttask p{
+  font-family: 'Crete Round', cursive;
+  font-size:22px;
+}
+
+
+/*
+  ####################  Content  #################
+*/
+
+.content{
+  display: flex;
+  justify-content:space-between;
+  align-items: flex-start;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  padding: 3%;
+  font-family: 'Crete Round', cursive;
+}
+
+.todos.flex-item{
+  flex:0 0 75%;
+  align-self: stretch;
+}
+
+.rightColumn.flex-item{
+  flex:0 0 25%
+}
+
+.todoForm{
+  padding:0 0 20px 0;
+  font-family: 'Oswald', sans-serif;
+  font-weight: bold;
+  display: flex;
+  justify-content:space-between;
+  flex-direction: column;
+}
+
+.todoForm .form-group{
+  display: flex;
+  justify-content: space-between;;
+  flex-direction: column;
+  padding-right: 15px;
+  flex: 1 0 auto;
+}
+
+.form-group label{
+  display: block;
+  margin:10px 0
+}
+
+.submitBtn{
+  align-self:center;
+  flex: 0 0 50%
+}
+.todos{
+  list-style: none;
+  padding: 0
+}
+.todos li{
+  padding:15px;
+  border-bottom:1px solid lightgray;
+}
+.todos li:hover{
+  background-color: white;
+  box-shadow:0px 2px 2px lightgray
+}
+.todos li p{
+  font-size:20px;
+  color:#E34239;
+  margin:0
+}
+
+.todos li small{
+  font-size:12px;
+  color:gray;
+  border-radius:5px 5px 5px 5px;
+  background-color: lightgray;
+  padding:3px;
+}

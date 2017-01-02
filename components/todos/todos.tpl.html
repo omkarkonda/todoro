@@ -1,0 +1,18 @@
+<form ng-submit="addTodo()">
+  <div class="todoForm">
+    <div class="form-group">
+      <label>Enter new task</label>
+      <input type="text" ng-model="todo" required >
+    </div>
+    <div class="form-group">
+      <label>Estimate</label>
+      <input type="number" ng-model="estimation" max="9" min="1" required>
+    </div>
+  </div>
+  <button type="submit" class="submitBtn">Add Todo</button>
+</form>
+<ul class="todos">
+  <li ng-repeat="todo in todos" ng-if="!todo.todoCompleted">
+    <p>{{todo.todo}} <small>{{todo.estimation}} Todoros</small></p>
+  </li>
+</ul>

@@ -1,5 +1,5 @@
-# todoro
-Pomodoro with todos
+# Todoro
+*Pomodoro with todos
 Add timer to your todo list. Measure the time taken by each task and be productive
 
 You can set the length of your todoro and break from settings 

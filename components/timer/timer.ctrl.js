@@ -1,10 +1,11 @@
 angular.module('todoro.timer',[])
   .controller('timerCtrl',[
     '$scope',
+    '$rootScope',
     'dataservice',
     '$interval',
     '$element',
-    function($scope, dataservice, $interval, $element){
+    function($scope, $rootScope, dataservice, $interval, $element){
 
     //initialize all timer variables
     $scope.tdMins = ("00" + dataservice.todoroLength).slice(-2);
@@ -13,34 +14,30 @@ angular.module('todoro.timer',[])
     $scope.tdShortBreakSecs = '00';
     $scope.timerCounter = 0;
     $scope.totalTimerCounter = 0;
-    $scope.currentTask = dataservice.currentTask;
-  
-    var todoroTimer, breakTimer;
+    $scope.isTimerRunning = dataservice.isTimerRunning;
+    $scope.tdCount = 0
 
-    //Get Current Task fn
-    // $scope.getCurrentTask = function(){
-    //   var tasks = dataservice.todos;
-    //    var cTask = tasks.filter(function(t){
-    //       if(t.currentTask && t.todoCompleted === false){
-    //         return true
-    //       }
-    //   })
-    //   return cTask
-    // }
-    //
-    // //Get Current Task
-    // $scope.currentTask = $scope.getCurrentTask();
-    // if(!$scope.currentTask.length <= 0){
-    //   $scope.tdCount = $scope.currentTask[0].estimation;
-    // }else{
-    //   $scope.currentTask.push({todo:'Task not selected', estimation:0})
-    // }
+    $rootScope.$on('taskSelected', function(){
+      if(!$scope.isTimerRunning){
+        $scope.currentTask = dataservice.currentTask;
+        $scope.tdCount = $scope.currentTask.estimation;
+      }
+    });
+
+    var todoroTimer, breakTimer;
 
     $scope.addZeros = function(time) {
       if(time < 10 ){
         time = ("00" + time).slice(-2)
       }
       return time
+    }
+
+    $scope.resetTimer = function(){
+      $scope.tdMins = ("00" + dataservice.todoroLength).slice(-2);
+      $scope.tdSecs = '00';
+      $scope.tdShortBreakMins = ("00" + dataservice.todoroShortBreakLength).slice(-2);
+      $scope.tdShortBreakSecs = '00';
     }
 
     //This function will run in $interval
@@ -51,7 +48,7 @@ angular.module('todoro.timer',[])
           if($scope.tdSecs == 0){
             $scope.tdMins--;
             $scope.tdSecs = 59;
-          }else{
+          } else{
             $scope.tdSecs--;
           }
 
@@ -87,19 +84,21 @@ angular.module('todoro.timer',[])
            //increment timer counter
            $scope.timerCounter++;
            $scope.totalTimerCounter++;
+
            if($scope.timerCounter < $scope.tdCount){
              // Reset todoro time to default
              $scope.tdMins = dataservice.todoroLength;
              $scope.startTodoroTimer();
            }
+
            if($scope.tdCount - $scope.timerCounter  == 0){
              $scope.tdShortBreakMins = '00';
              dataservice.isTimerRunning = false;
              console.log('timer stopped');
+
              //re-initialize all timer variables
              $scope.timerCounter = 0;
-             $scope.tdMins = ("00" + dataservice.todoroLength).slice(-2);
-             $scope.tdShortBreakMins = ("00" + dataservice.todoroShortBreakLength).slice(-2);
+             $scope.resetTimer()
            }
         }
       }
@@ -107,11 +106,9 @@ angular.module('todoro.timer',[])
 
     // Start timer button action
     $scope.startTodoroTimer = function(){
-      if($scope.tdCount){
+      if($scope.tdCount && $scope.currentTask){
         todoroTimer = $interval($scope.tick, 1000);
         dataservice.isTimerRunning = true;
-      }else{
-        alert('current task is not defined')
       }
     }
     // Start break timer
@@ -124,4 +121,19 @@ angular.module('todoro.timer',[])
       $interval.cancel(t);
       t = undefined;
     }
+
+    $scope.removeTask = function() {
+      $scope.currentTask = null;
+      $scope.resetTimer();
+      $scope.stopTicking(todoroTimer);
+      $scope.stopTicking(breakTimer);
+      dataservice.isTimerRunning = false;
+    }
+
+    $scope.$watch(function(){return dataservice.isTimerRunning}, function(oldval, newval){
+      if(oldval !== newval){
+        $scope.isTimerRunning = dataservice.isTimerRunning
+      }
+    })
+
   }])

@@ -1,10 +1,21 @@
 angular.module('todoro.todos', [])
   .controller('todosCtrl',[
     '$scope',
+    '$rootScope',
     'dataservice',
-    function($scope, dataservice){
+    function($scope, $rootScope, dataservice){
       $scope.todos = dataservice.todos;
-      $scope.selectCurTask = dataservice.selectCurTask;
+      //$scope.selectCurTask = dataservice.selectCurTask;
+      $scope.resetCurrentTask = dataservice.resetCurrentTask;
+      $scope.isTimerRunning = dataservice.isTimerRunning
+
+      $scope.selectCurTask = function(t){
+        $scope.todos = $scope.resetCurrentTask();
+        t.currentTask = true;
+        dataservice.currentTask = t;
+        $rootScope.$emit('taskSelected');
+      }
+
       $scope.addTodo = function(){
         var obj = {
           todo: $scope.todo,

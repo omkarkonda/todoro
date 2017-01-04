@@ -1,27 +1,16 @@
 angular.module('todoro')
-  .factory('dataservice', ['$q', function($q){
+  .factory('dataservice', ['$q','$rootScope', function($q, $rootScope){
      var self = this;
-     self.todoroLength = 1;
-     self.todoroShortBreakLength = 1;
+     self.todoroLength = 25;
+     self.todoroShortBreakLength = 5;
      self.isTimerRunning = false;
-     self.currentTask = {};
-
+     self.currentTask;
      self.resetCurrentTask = function(){
         var cTask = self.todos.map(function(td){
           td.currentTask = false;
           return td
         });
-       return cTask
-     }
-
-     self.selectCurTask = function(t){
-       if(!self.isTimerRunning){
-         self.todos = self.resetCurrentTask();
-         t.currentTask = !t.currentTask;
-         self.currentTask = t;
-         console.log(self.currentTask);
-         return self.currentTask;
-       }
+       return cTask;
      }
 
      self.todos = [
@@ -49,8 +38,8 @@ angular.module('todoro')
        todoroLength: self.todoroLength,
        todoroShortBreakLength: self.todoroShortBreakLength,
        todos: self.todos,
+       resetCurrentTask:self.resetCurrentTask,
        isTimerRunning: self.isTimerRunning,
-       currentTask: self.currentTask,
        selectCurTask: self.selectCurTask
      }
   }])

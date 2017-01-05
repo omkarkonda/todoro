@@ -1,10 +1,11 @@
 angular.module('todoro')
   .factory('dataservice', ['$q','$rootScope', function($q, $rootScope){
      var self = this;
-     self.todoroLength = 25;
-     self.todoroShortBreakLength = 5;
+     self.todoroLength = 1;
+     self.todoroShortBreakLength = 1;
      self.isTimerRunning = false;
      self.currentTask;
+
      self.resetCurrentTask = function(){
         var cTask = self.todos.map(function(td){
           td.currentTask = false;

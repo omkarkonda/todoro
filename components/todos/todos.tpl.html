@@ -12,7 +12,7 @@
   <button type="submit" class="submitBtn">Add Todo</button>
 </form>
 <ul class="todos">
-  <li ng-repeat="todo in todos" ng-if="!todo.todoCompleted">
-    <p>{{todo.todo}} <small>{{todo.estimation}} Todoros</small></p>
-  </li>
+<li ng-repeat="todo in todos" ng-if="!todo.todoCompleted" ng-class="{current:todo.currentTask}">
+    <p ng-click="selectCurTask(todo)">{{todo.todo}} <small>{{todo.estimation}} Todoros</small></p>
+</li>
 </ul>

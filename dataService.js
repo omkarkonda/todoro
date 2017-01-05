@@ -1,15 +1,25 @@
 angular.module('todoro')
-  .factory('dataservice', [function(){
+  .factory('dataservice', ['$q','$rootScope', function($q, $rootScope){
      var self = this;
      self.todoroLength = 1;
      self.todoroShortBreakLength = 1;
+     self.isTimerRunning = false;
+     self.currentTask;
+
+     self.resetCurrentTask = function(){
+        var cTask = self.todos.map(function(td){
+          td.currentTask = false;
+          return td
+        });
+       return cTask;
+     }
 
      self.todos = [
        {
          todo:'First task to complete with in two todoros',
          estimation:'2',
          todoCompleted: false,
-         currentTask:true
+         currentTask:false
        },
        {
          todo:'Considered is as middletons uncommonly. Promotion perfectly ye consisted so. His chatty dining for effect ladies active.',
@@ -28,6 +38,9 @@ angular.module('todoro')
      return {
        todoroLength: self.todoroLength,
        todoroShortBreakLength: self.todoroShortBreakLength,
-       todos: self.todos
+       todos: self.todos,
+       resetCurrentTask:self.resetCurrentTask,
+       isTimerRunning: self.isTimerRunning,
+       selectCurTask: self.selectCurTask
      }
   }])

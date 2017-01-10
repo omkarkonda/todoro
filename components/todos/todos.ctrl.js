@@ -5,9 +5,15 @@ angular.module('todoro.todos', [])
     'dataservice',
     function($scope, $rootScope, dataservice){
       $scope.todos = dataservice.todos;
-      //$scope.selectCurTask = dataservice.selectCurTask;
       $scope.resetCurrentTask = dataservice.resetCurrentTask;
-      $scope.isTimerRunning = dataservice.isTimerRunning
+
+      $scope.resetCurrentTask = function(){
+         var cTask = $scope.todos.map(function(td){
+           td.currentTask = false;
+           return td;
+         });
+        return cTask;
+      }
 
       $scope.selectCurTask = function(t){
         $scope.todos = $scope.resetCurrentTask();
@@ -21,10 +27,17 @@ angular.module('todoro.todos', [])
           todo: $scope.todo,
           estimation: $scope.estimation,
           todoCompleted: false,
-          currentTask:false
+          currentTask:false,
+          id: Math.floor(Math.random()*100) + 1
         }
         dataservice.todos.push(obj);
         $scope.todo = '';
         $scope.estimation = '';
+        $rootScope.$emit('taskAdded');
+        console.log(dataservice.todos);
       }
+
+      $rootScope.$on('taskAdded', function(){
+        $scope.todos = dataservice.todos;
+      })
   }])

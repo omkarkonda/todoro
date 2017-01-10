@@ -135,7 +135,7 @@ h1.brTime{
   color:#529769
 }
 
-.currenttask .removeTask{
+.currenttask .removeTaskBtn{
   position: absolute;
   left:50%;
   top:100%;

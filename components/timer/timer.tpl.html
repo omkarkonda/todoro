@@ -5,11 +5,20 @@
   <div>
     <button ng-click="startTodoroTimer()" ng-disabled="isTimerRunning" class="startTimerBtn">Start Timer</button>
   </div>
+  <div class="settings">
+    
+  </div>
+  <div>
+    <a ui-sref="home.settings({})">Settings</a>
+  </div>
 </div>
 <div class="currenttask flex-item">
   <!-- <div class="line"></div> -->
   <div ng-show="currentTask">
-    <button ng-click="removeTask()" class="removeTask">remove</button>
+    <div class="taskActions">
+      <button ng-click="removeTask()" class="removeTaskBtn">remove current task</button>
+      <button ng-if="showCompleteBtn" ng-click="taskComplete(currentTask.id)" class="completeBtn">Task Completed</button>
+    </div>
     <p class="currentTaskError">
       {{currentTask.todo}}
     </p>

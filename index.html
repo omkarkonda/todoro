@@ -10,7 +10,7 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
-  <link href="https://fonts.googleapis.com/css?family=Oswald:700|Crete+Round" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Oswald:700|Open+Sans" rel="stylesheet">
   <link rel="stylesheet" href="app.css">
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
@@ -21,8 +21,8 @@
   <div ui-view="reports"></div>
   <div ui-view="settings"></div>
   <div ui-view="header" class="header"></div>
-  <div ui-view="timerWrapper" class="timerWrapper"></div>
   <div class="content">
+    <div ui-view="timerWrapper" class="timerWrapper"></div>
     <div ui-view="todos" class="todos flex-item"></div>
     <div class="rightColumn flex-item">
       <div ui-view="todoinfo" class="todoinfo"></div>
@@ -40,7 +40,9 @@
   <script src="dataService.js" charset="utf-8"></script>
   <script src="components/timer/timer.ctrl.js" charset="utf-8"></script>
   <script src="components/todos/todos.ctrl.js" charset="utf-8"></script>
-
+  <script src="components/completedTodos/completedTodos.ctrl.js" charset="utf-8"></script>
+  <script src="components/todoinfo/todoinfo.ctrl.js" charset="utf-8"></script>
+  <script src="components/settings/settings.ctrl.js" charset="utf-8"></script>
 
   <!-- <script src="view1/view1.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>

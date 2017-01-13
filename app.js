@@ -1,7 +1,13 @@
 'use strict';
 // Declare app level module which depends on views, and components
-angular.module('todoro', ['ui.router', 'todoro.timer','todoro.todos'])
-  .config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlRouterProvider){
+angular.module('todoro', [
+  'ui.router',
+  'todoro.timer',
+  'todoro.todos',
+  'todoro.completedtodos',
+  'todoro.todoinfo',
+  'todoro.settings'
+]).config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlRouterProvider){
     $stateProvider
       .state('home',{
         url:'/',
@@ -18,10 +24,12 @@ angular.module('todoro', ['ui.router', 'todoro.timer','todoro.todos'])
             controller:'todosCtrl'
           },
           todoinfo:{
-            template:'<h4>Todo Info</h4>'
+            templateUrl:'components/todoinfo/todoinfo.tpl.html',
+            controller:'todoinfoCtrl'
           },
           completedtodos:{
-            template:'<h4>Completed Todo List</h4>'
+            templateUrl:'components/completedTodos/completedTodos.tpl.html',
+            controller: 'completedTodosCtrl'
           }
         }
       })
@@ -29,7 +37,8 @@ angular.module('todoro', ['ui.router', 'todoro.timer','todoro.todos'])
         url:'settings',
         views:{
           'settings@':{
-            template: 'settings'
+            templateUrl: 'components/settings/settings.tpl.html',
+            controller:'settingsCtrl'
           }
         }
       })

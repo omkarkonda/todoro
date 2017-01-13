@@ -1,0 +1,7 @@
+<h3>Completed Tasks</h3>
+<ul class="ctasklist">
+  <li ng-repeat="todo in todos" ng-if="todo.todoCompleted">
+      <p>{{todo.todo}}</p>
+      <small>{{todo.timeTaken}}</small>
+  </li>
+</ul>

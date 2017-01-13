@@ -1,20 +1,21 @@
-<h3>Tasks</h3>
-<ul class="todos">
-<li ng-repeat="todo in todos" ng-if="!todo.todoCompleted" ng-class="{current:todo.currentTask}">
-    <p ng-click="selectCurTask(todo)">{{todo.todo}} <small>{{todo.estimation}} Todoros</small></p>
-</li>
-</ul>
-
+<h3>Add a new task</h3>
 <form ng-submit="addTodo()">
   <div class="todoForm">
-    <div class="form-group">
-      <label>Enter new task</label>
+    <div class="form-group task">
       <input type="text" ng-model="todo" required >
+      <label>Enter new task</label>
+
     </div>
-    <div class="form-group">
-      <label>Estimate</label>
+    <div class="form-group estimate">
       <input type="number" ng-model="estimation" max="9" min="1" required>
+      <label>Estimate</label>
     </div>
+    <button type="submit" class="submitBtn">Add</button>
   </div>
-  <button type="submit" class="submitBtn">Add Todo</button>
 </form>
+<h3>Tasks</h3>
+<ul class="todos">
+    <li ng-repeat="todo in todos" ng-if="!todo.todoCompleted" ng-class="{current:todo.currentTask}">
+        <p ng-click="selectCurTask(todo)">{{todo.todo}} <small>{{todo.estimation}} Todoros</small></p>
+    </li>
+  </ul>

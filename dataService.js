@@ -11,7 +11,28 @@ angular.module('todoro')
          id:Math.floor(Math.random()*100) + 1,
          todo:'Add settings view',
          estimation:'1',
-         todoCompleted: true,
+         todoCompleted: false,
+         currentTask:false
+       },
+       {
+         id:Math.floor(Math.random()*100) + 1,
+         todo:'Add Ticker sound when the interval is running, also an option to play pause',
+         estimation:'1',
+         todoCompleted: false,
+         currentTask:false
+       },
+       {
+         id:Math.floor(Math.random()*100) + 1,
+         todo:'when timer stops ask user whether the current task is completed',
+         estimation:'1',
+         todoCompleted: false,
+         currentTask:false
+       },
+       {
+         id:Math.floor(Math.random()*100) + 1,
+         todo:'implement localstorage to presist tasks',
+         estimation:'1',
+         todoCompleted: false,
          currentTask:false
        },
        {
@@ -32,7 +53,7 @@ angular.module('todoro')
          id:Math.floor(Math.random()*100) + 1,
          todo:'implement localstorage to presist tasks',
          estimation:'1',
-         todoCompleted: false,
+         todoCompleted: true,
          currentTask:false
        }
      ];

@@ -1,27 +1,25 @@
 <div class="timer flex-item">
   <h1 class="tdTime" ng-show="tdMins>0 || tdSecs>0">{{tdMins}}:{{tdSecs}}</h1>
   <h1 class="brTime" ng-hide="tdMins>0 || tdSecs>0">{{tdShortBreakMins}}:{{tdShortBreakSecs}}</h1>
+  <button ng-click="startTodoroTimer()" ng-disabled="isTimerRunning" class="startTimerBtn">Start Timer</button>
   <small>Completed {{totalTimerCounter}}/{{tdCount}} todoros</small>
-  <div>
-    <button ng-click="startTodoroTimer()" ng-disabled="isTimerRunning" class="startTimerBtn">Start Timer</button>
-  </div>
-  <div class="settings">
-    
-  </div>
-  <div>
+
+  <!-- <div>
     <a ui-sref="home.settings({})">Settings</a>
-  </div>
+  </div> -->
 </div>
 <div class="currenttask flex-item">
   <!-- <div class="line"></div> -->
-  <div ng-show="currentTask">
+  <div ng-show="currentTask" class="timertask">
+    <p class="currentTaskError">{{currentTask.todo}}</p>
     <div class="taskActions">
       <button ng-click="removeTask()" class="removeTaskBtn">remove current task</button>
       <button ng-if="showCompleteBtn" ng-click="taskComplete(currentTask.id)" class="completeBtn">Task Completed</button>
     </div>
-    <p class="currentTaskError">
-      {{currentTask.todo}}
+  </div>
+  <div ng-show="!currentTask" class="timertask">
+    <p  class="currentTaskError">
+      Select a task to continue
     </p>
   </div>
-  <p ng-show="!currentTask" class="currentTaskError"><i class="fa fa-bell" aria-hidden="true"></i>Select a task to continue</p>
 </div>
